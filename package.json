@@ -4,7 +4,9 @@
   "description": "App that lets user run natural language processing on articles",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack-dev-server": "webpack-dev-server",
+    "dev": "webpack-dev-server --mode=development --env.gdc='http://localhost:5000'",
+    "prod": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -18,23 +20,25 @@
   },
   "homepage": "https://github.com/maxtherussianguy/NLP_website#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "css-loader": "^4.2.1",
+    "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "regenerator-runtime": "^0.13.7",
+    "request": "^2.88.2",
     "style-loader": "^1.2.1"
   },
-  "scripts": {
-    "webpack-dev-server": "webpack-dev-server",
-    "dev": "webpack-dev-server --mode=development",
-    "prod": "webpack --mode=production"
-  },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
     "html-webpack-plugin": "^4.3.0",
     "path": "^0.12.7",
     "webpack": "^4.44.1",
