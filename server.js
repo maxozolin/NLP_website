@@ -6,6 +6,7 @@ const express = require('express');
 
 const request = require('request');
 
+const path = require('path')
 /* Start up an instance of app */
 const app = express();
 
@@ -18,39 +19,15 @@ const cors = require('cors');
 app.use(cors());
 
 /* Initialize the main project folder*/
-app.use('/dist', express.static('public'));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 const port = 5000;
 /* Spin up the server*/
 const server = app.listen(port);
 
 //Logging start time
-console.log(`sever started at ${Math.floor(new Date() / 1000)}`);
+console.log(`sever started at ${Math.floor(new Date() / 1000)} port ${port}`);
 
-
-
-app.get('/', function (req, resp) {
-    var options = {
-        headers: {
-          'x-timestamp': Date.now(),
-          'x-sent': true
-        }
-      }
-    resp.sendFile(__dirname + "/dist/index.html",options)
-})
-
-app.get('/main.js', function (req, resp) {
-    var options = {
-        headers: {
-          'x-timestamp': Date.now(),
-          'x-sent': true
-        }
-      }
-    // resp.location(__dirname + '/dist/')
-    resp.sendFile(__dirname + "/dist/main.js",options)
-})
-
-//POST REQUEST WITH LONGITUDE AND LATITUDE
 app.get('/app', function (req, resp) {
 
     resp.send({"message":"Hello there"})
