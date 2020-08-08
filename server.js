@@ -29,7 +29,7 @@ const server = app.listen(port);
 console.log(`sever started at ${Math.floor(new Date() / 1000)} port ${port}`);
 
 app.get('/app', function (req, resp) {
-
-    resp.send({"message":"Hello there"})
-    console.log('got request')
+    let data = {message:"Hello there"}
+    resp.send(data)
+    console.log(`got request, sent ${data.message}`)
 })
