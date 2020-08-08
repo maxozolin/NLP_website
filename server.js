@@ -1,3 +1,4 @@
+
 /* Empty JS object to act as endpoint for all routes */
 projectData = {};
 
@@ -28,8 +29,30 @@ const server = app.listen(port);
 //Logging start time
 console.log(`sever started at ${Math.floor(new Date() / 1000)} port ${port}`);
 
-app.get('/app', function (req, resp) {
-    let data = {message:"Hello there"}
-    resp.send(data)
-    console.log(`got request, sent ${data.message}`)
+apikey = "ac876c4e2b08a5353242ef1e7480c279"
+console.log(apikey)
+
+app.post('/app', function (req, resp) {
+    
+    //Get userdata
+    let udata = req.body
+    //Get the city from userdata
+    let url = udata["url"]
+    //Instanciating time
+    //Logging with UTC timestamp time
+    console.log(`requested ${url}`)
+
+    let apiUrl = `https://api.meaningcloud.com/topics-2.0?key=${apikey}&of=json&lang=en&ilang=en&url=${url}&tt=a`
+
+    request(apiUrl, { json: true }, (err, res, body) => {
+        if (err) { return console.log(err); }
+        let apidata=res.body
+        try{
+            console.log(apidata)
+        } catch(e){
+            console.log(e)
+        }
+        //Return Parsed Data
+        resp.send(apidata);
+    });
 })
