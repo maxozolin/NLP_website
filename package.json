@@ -1,5 +1,4 @@
 {
-  "name": "NLP_website",
   "version": "1.0.0",
   "description": "App that lets user run natural language processing on articles",
   "main": "index.js",
