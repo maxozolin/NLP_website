@@ -5,6 +5,8 @@
   "proxy": "http://localhost:5000",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
+    "firststart": "npm install && npm run prod && npm run server",
+    "start": "npm run prod && npm run server",
     "dev": "webpack-dev-server  --config webpack.dev.js --open ",
     "prod": "webpack --config webpack.prod.js",
     "server": "node-env-run server --exec nodemon | pino-colada"
