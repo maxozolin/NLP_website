@@ -12,8 +12,8 @@ function App() {
 
 
     useEffect(() => {
-        console.log("storage :", localStorage.getItem(LOCAL_STORAGE_KEY), localStorage.getItem(LOCAL_STORAGE_KEY)=="undefined")
-        if(localStorage.getItem(LOCAL_STORAGE_KEY)=="undefined") return
+        console.log("storage :", localStorage.getItem(LOCAL_STORAGE_KEY), localStorage.getItem(LOCAL_STORAGE_KEY) == "undefined")
+        if (localStorage.getItem(LOCAL_STORAGE_KEY) == "undefined") return
         const storedAppData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
         if (storedAppData) changeData(storedAppData)
     }, [])
@@ -25,39 +25,47 @@ function App() {
 
     let callApi = async (e) => {
         e.preventDefault()
+        var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
         let url = websiteNameRef.current.value;
-        console.log(url)
-        if (url == "") return
 
-        console.log("CLICKED")
-        const settings = {
-            method: 'post',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ "url": url })
-        };
-        try {
-            //Post coords to server
-            const res = await fetch(`/api/app`, settings);
-            // console.log(res.json())
-
+        if (url.match(regex)) {
+            const settings = {
+                method: 'post',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ "url": url })
+            };
             try {
-                //get back data
-                let dat = await res.json();
-                console.log(dat)
-                changeData(() => {
-                    return dat;
-                });
-                console.log(appData);
-            } catch (error) {
-                //if there is an error in the connection log it with the data recieved
-                console.log("error", error, dat);
+                //Post coords to server
+                const res = await fetch(`/api/app`, settings);
+                // console.log(res.json())
+
+                try {
+                    //get back data
+                    let dat = await res.json();
+                    console.log(dat)
+                    changeData(() => {
+                        return dat;
+                    });
+                    console.log(appData);
+                } catch (error) {
+                    //if there is an error in the connection log it with the data recieved
+                    console.log("error", error, dat);
+                }
+            } catch (e) {
+                return e;
             }
-        } catch (e) {
-            return e;
+
+
+
+        } else {
+            alert("Not a website");
+            return
         }
+
 
 
     }
@@ -72,10 +80,10 @@ function App() {
                 </div>
                 <button className="btn btn-primary" onClick={callApi}>Submit</button>
             </form>
-            <WordList data={appData} read="concept_list" min={40}/>
-            <WordList data={appData} read="entity_list" min={5}/>
-            <QuoteList data={appData} read="quotation_list" minlength={40}/>
-            
+            <WordList data={appData} read="concept_list" min={40} />
+            <WordList data={appData} read="entity_list" min={5} />
+            <QuoteList data={appData} read="quotation_list" minlength={40} />
+
 
         </>
     );

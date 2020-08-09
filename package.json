@@ -5,8 +5,8 @@
   "proxy": "http://localhost:5000",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
-    "dev": "webpack-dev-server --mode=development --env.gdc='http://localhost:5000'",
-    "prod": "webpack --mode=production",
+    "dev": "webpack-dev-server  --config webpack.dev.js --open ",
+    "prod": "webpack --config webpack.prod.js",
     "server": "node-env-run server --exec nodemon | pino-colada"
   },
   "repository": {
@@ -52,6 +52,7 @@
     "sass-loader": "^9.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }
