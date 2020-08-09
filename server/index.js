@@ -20,19 +20,22 @@ const cors = require('cors');
 app.use(cors());
 
 /* Initialize the main project folder*/
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '..','dist')));
 
 const port = 5000;
+
+const dotenv = require('dotenv');
+dotenv.config();
 /* Spin up the server*/
 const server = app.listen(port);
 
 //Logging start time
 console.log(`sever started at ${Math.floor(new Date() / 1000)} port ${port}`);
 
-apikey = "ac876c4e2b08a5353242ef1e7480c279"
+apikey = process.env.API_KEY
 console.log(apikey)
 
-app.post('/app', function (req, resp) {
+app.post('/api/app', function (req, resp) {
     
     //Get userdata
     let udata = req.body

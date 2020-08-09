@@ -27,10 +27,30 @@ module.exports = {
          }
       ]
    },
+   // webpack stuff here ...
+
+   //dev server configuration
+   devServer: {
+
+      // ...
+
+      // every request made to 'locahost:8080/api/xxxx' will be proxyfied to 'http://localhost:7000/api/xxxx'
+      proxy: {
+         "/api/*": {
+            target: "http://localhost:5000",
+            secure: false,
+            rewrite: function (req, options) {
+               //you can handle rewrite here if you need to        
+            }
+         },
+
+      }
+   },
    plugins: [
       new HtmlWebPackPlugin({
          template: path.resolve(__dirname, 'src/public/index.html'),
          filename: 'index.html'
       })
-   ]
+   ],
+
 };

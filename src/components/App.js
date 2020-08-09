@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import WordList from './WordList'
+import QuoteList from './QuoteList'
 import uuid from 'uuid'
 
 const LOCAL_STORAGE_KEY = 'websiteApp.appData'
@@ -39,7 +40,7 @@ function App() {
         };
         try {
             //Post coords to server
-            const res = await fetch(`http://localhost:5000/app`, settings);
+            const res = await fetch(`/api/app`, settings);
             // console.log(res.json())
 
             try {
@@ -62,8 +63,8 @@ function App() {
     }
 
     return (
-        <div className="">
-            <form>
+        <>
+            <form className="col-md-7 mr-auto ml-auto">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Website</label>
                     <input type="text" className="form-control" id="websiteInput" aria-describedby="websiteInput" ref={websiteNameRef} />
@@ -71,10 +72,12 @@ function App() {
                 </div>
                 <button className="btn btn-primary" onClick={callApi}>Submit</button>
             </form>
-            <WordList data={appData} read="concept_list"/>
-            <WordList data={appData} read="entity_list"/>
+            <WordList data={appData} read="concept_list" min={40}/>
+            <WordList data={appData} read="entity_list" min={5}/>
+            <QuoteList data={appData} read="quotation_list" minlength={40}/>
+            
 
-        </div>
+        </>
     );
 }
 export default App
