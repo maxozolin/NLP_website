@@ -11,8 +11,14 @@ function App() {
     const websiteNameRef = useRef()
 
 
+    function isWebsite(str){
+        var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
+
+        return str.match(regex) ? true : false;
+    }
+
     useEffect(() => {
-        console.log("storage :", localStorage.getItem(LOCAL_STORAGE_KEY), localStorage.getItem(LOCAL_STORAGE_KEY) == "undefined")
         if (localStorage.getItem(LOCAL_STORAGE_KEY) == "undefined") return
         const storedAppData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
         if (storedAppData) changeData(storedAppData)
@@ -29,7 +35,7 @@ function App() {
         var regex = new RegExp(expression);
         let url = websiteNameRef.current.value;
 
-        if (url.match(regex)) {
+        if (isWebsite(url)) {
             const settings = {
                 method: 'post',
                 headers: {
@@ -80,9 +86,9 @@ function App() {
                 </div>
                 <button className="btn btn-primary" onClick={callApi}>Submit</button>
             </form>
-            <WordList data={appData} read="concept_list" min={40} />
-            <WordList data={appData} read="entity_list" min={5} />
-            <QuoteList data={appData} read="quotation_list" minlength={40} />
+            <WordList data={appData} read="concept_list" min={0} />
+            <WordList data={appData} read="entity_list" min={0} />
+            <QuoteList data={appData} read="quotation_list" minlength={0} />
 
 
         </>

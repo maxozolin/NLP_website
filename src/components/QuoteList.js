@@ -4,48 +4,37 @@ import QuoteItem from './QuoteItem'
 function QuoteList(props) {
 
     function decideDisplay(){
+        let rd;
         if (props.data !== undefined ) {
             if (props.data.hasOwnProperty(props.read)){
                 if(props.data[props.read].length>0){
-                    display = "block";
+                    rd = "block";
+                    return rd;
                 } 
-                else{
-                    display ="none"
-                }
-            }
-            else{
-                display = "none"
             }
         }
-        else{
-            display =  "none"
-        }
+        rd ="none"
+        return rd;
     }
-    let display
+    let display = decideDisplay()
     let arr = [];
     return (
         <>
-        {
-            decideDisplay()
-        }
         <div className={"ml-auto mr-auto col-md-8 col-sm-12 "+props.read.split("_list")[0]} style={{display: display}}>
             <h1 className="mainheading">{props.read.split("_list")[0]}</h1>
             {
                 function () {
-                    console.log("I RAN", props)
                     if (props.data !== undefined) {
-                        console.log(props.data.status.msg == "OK")
                         if (props.data.status.msg == "OK") {
                             arr = props.data[props.read].map(concept => {
                                 return <QuoteItem con={concept} key={concept.inip} min={props.minlength}/>
                             })
-                            console.log("props data", arr)
                             if(arr.length == 0){
                                 arr.push(<p className="notloaded" key="notloaded">Not found</p>)
                             }
                         }
                     }
-                    else return <div className="notloaded">not loaded yet</div>;
+                    else return <div className="notloaded" key="notloaded">not loaded yet</div>;
                 }()
             }
 
