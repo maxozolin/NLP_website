@@ -2,18 +2,36 @@
  App that lets user run natural language processing on articles
 
 
-How to start:
+##How to set up
 
-    Open terminal in NLP_website folder, 
-    run following command: -> npm run firststart
 
-Once fiststart has been run sever runs on http://localhost:5000, if you want to restart :
+###api key
+Note API_KEY is hidden in .env 
+- get your own at https://www.meaningcloud.com/ 
+- change **server/index.js:line 35**
+```js
+// server/index.js : line 35
+apikey = INSERT_YOUR_API_KEY_HERE
+```
+###first start
+- Open terminal in NLP_website folder
+- run following command: 
+    - ```bash
+       npm run firststart
+      ```
+- Done! (Production sever up and running on on http://localhost:5000)
 
-    for production (runs on http://localhost:5000) : -> npm run start       
+###development mode
 
-    for development (runs on http://localhost:8080): -> npm run dev   
+if you want to restart :
+
+- for production (runs on http://localhost:5000) :
+    -  ```bash 
+        npm run start
+       ```       
+
+- for development (runs on http://localhost:8080) :
+    -  ```bash 
+        npm run dev
+       ```       
     
-Note API_KEY is hidden in .env so you would have to get your own at https://www.meaningcloud.com/ and change :
-
-    # server/index.js : line 35
-    apikey = INSERT_YOUR_API_KEY_HERE
