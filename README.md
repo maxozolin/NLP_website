@@ -2,10 +2,10 @@
  App that lets user run natural language processing on articles
 
 
-##How to set up
+## How to set up
 
 
-###api key
+### api key
 Note API_KEY is hidden in .env 
 - get your own at https://www.meaningcloud.com/ 
 - change **server/index.js:line 35**
@@ -13,7 +13,7 @@ Note API_KEY is hidden in .env
 // server/index.js : line 35
 apikey = INSERT_YOUR_API_KEY_HERE
 ```
-###first start
+### first start
 - Open terminal in NLP_website folder
 - run following command: 
     - ```bash
@@ -21,7 +21,7 @@ apikey = INSERT_YOUR_API_KEY_HERE
       ```
 - Done! (Production sever up and running on on http://localhost:5000)
 
-###development mode
+### development mode
 
 if you want to restart :
 
